@@ -1,4 +1,4 @@
-version: '3.1'
+# version: '3.1'
 
 services:
   db:
@@ -15,7 +15,7 @@ services:
 
   backend:
     build:
-      context: ./backend   # Apunta al directorio backend, que contiene el Dockerfile
+      context: ./backend
     container_name: mi_backend
     ports:
       - "3000:3000"
