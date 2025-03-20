@@ -1,0 +1,32 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres
+    container_name: mi_postgres
+    environment:
+      POSTGRES_USER: dkpostgres
+      POSTGRES_PASSWORD: postgres123
+      POSTGRES_DB: pruebadb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend   # Apunta al directorio backend, que contiene el Dockerfile
+    container_name: mi_backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: dkpostgres
+      DB_PASS: postgres123
+      DB_NAME: pruebadb
+
+volumes:
+  pg_data:
